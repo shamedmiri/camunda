@@ -2,6 +2,8 @@ package com.example.demo.worker;
 
 import com.example.demo.config.ApiUrlsProperties;
 import com.example.demo.service.ApiService;
+import com.example.demo.utils.ConvertDate;
+import com.github.eloyzone.jalalicalendar.DateConverter;
 import org.camunda.bpm.client.ExternalTaskClient;
 import org.camunda.bpm.client.task.ExternalTask;
 import org.camunda.bpm.client.task.ExternalTaskHandler;
@@ -13,6 +15,10 @@ import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +35,8 @@ public class ExternalTaskWorker {
 
     @PostConstruct
     public void subscribeToTopic() {
+        String date = ConvertDate.currentDateShamsi();
+        String time = ConvertDate.currentTimeShamsi();
 
         ExternalTaskClient client = ExternalTaskClient.create()
                 .baseUrl(properties.getCamunda())
@@ -53,6 +61,8 @@ public class ExternalTaskWorker {
                                 SpinJsonNode jsonNode = Spin.JSON(vars.get("Output"));
 
                                 Map<String, Object> result = new HashMap<>();
+                                result.put("Date", date);
+                                result.put("Time", time);
                                 result.put("email", jsonNode.prop("data").prop("email").stringValue());
                                 result.put("last_name", jsonNode.prop("data").prop("last_name").stringValue());
 
