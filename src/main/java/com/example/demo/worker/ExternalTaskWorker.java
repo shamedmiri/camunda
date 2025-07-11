@@ -49,7 +49,7 @@ public class ExternalTaskWorker {
                             if (statusCode != 200) {
                                 service.handleBpmnError(task, "ERR_END", "خطای سرویس", vars);
                             } else {
-
+                                System.out.println("test");
                                 SpinJsonNode jsonNode = Spin.JSON(vars.get("Output"));
 
                                 Map<String, Object> result = new HashMap<>();
