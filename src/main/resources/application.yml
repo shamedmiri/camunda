@@ -4,7 +4,7 @@ server:
 api:
   urls:
     user: https://reqres.in/api/users/
-    posts: https://68700b7f7ca4d06b34b5d3a8.mockapi.io/hamed/api/user/hamed
+    posts: https://68700b7f7ca4d06b34b5d3a8.mockapi.io/hamed/api/user/hamed/2
     camunda: http://localhost:8081/engine-rest
     #camunda: http://host.docker.internal:8081/engine-rest
 

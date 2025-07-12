@@ -43,7 +43,9 @@ public class AnotherWorker {
                             result.put("success_text", "ثبت نام با موفقیت صورت پذیرفت");
                             externalTaskService.complete(externalTask, result);
                         } else {
-                            externalTaskService.handleBpmnError(externalTask, "ERR_END", "خطای سرویس", variables);
+                            Map<String, Object> result = new HashMap<>();
+                            result.put("error_text", "سرویس در حال حاضر پاسخگو نمی باشد");
+                            externalTaskService.handleBpmnError(externalTask, "ERR_END", "خطای سرویس", result);
 
                         }
                     } catch (Exception e) {
