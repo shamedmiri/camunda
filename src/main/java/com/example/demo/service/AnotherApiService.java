@@ -27,20 +27,20 @@ public class AnotherApiService {
         this.urls = urls;
     }
 
-    public Map<String, Object> callUserApi(String username, String email, String password) throws Exception {
-        return callApi(urls.getPosts(), username, email, password);
+    public Map<String, Object> callUserApi(String name, String email, String mobile) throws Exception {
+        return callApi(urls.getPosts(), name, email, mobile);
     }
 
 
-    private Map<String, Object> callApi(String url, String username, String email, String password) throws Exception {
+    private Map<String, Object> callApi(String url, String name, String email, String mobile) throws Exception {
         Map<String, Object> result = new HashMap<>();
         String jsonRequest = String.format("""
                 {
                   "Name": "%s",
-                  "email": "%s",
-                  "password": "%s"
+                  "Email": "%s",
+                  "Mobile": "%s"
                 }
-                """, username, email, password);
+                """, name, email, mobile);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("accept", "application/json")

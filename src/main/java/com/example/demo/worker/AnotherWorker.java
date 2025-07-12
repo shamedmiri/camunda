@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -30,15 +31,17 @@ public class AnotherWorker {
         client.subscribe("anotherTaskTopic") // تاپیک جدید در BPMN
                 .lockDuration(30000)
                 .handler((externalTask, externalTaskService) -> {
-                    String userName = externalTask.getVariable("lastName");
+                    String name = externalTask.getVariable("last_name");
                     String email = externalTask.getVariable("email");
-                    String password = "Password";
+                    String mobile = externalTask.getVariable("phone_number");
                     try {
-                        Map<String, Object> variables = apiService.callUserApi(userName, email, password);
+                        Map<String, Object> variables = apiService.callUserApi(name, email, mobile);
                         int statusCode = (int) variables.get("statusCode");
 
                         if (statusCode == 200 || statusCode == 201) {
-                            externalTaskService.complete(externalTask, variables);
+                            Map<String, Object> result = new HashMap<>();
+                            result.put("success_text", "ثبت نام با موفقیت صورت پذیرفت");
+                            externalTaskService.complete(externalTask, result);
                         } else {
                             externalTaskService.handleBpmnError(externalTask, "ERR_END", "خطای سرویس", variables);
 

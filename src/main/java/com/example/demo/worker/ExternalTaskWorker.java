@@ -2,23 +2,17 @@ package com.example.demo.worker;
 
 import com.example.demo.config.ApiUrlsProperties;
 import com.example.demo.service.ApiService;
-import com.example.demo.utils.ConvertDate;
-import com.github.eloyzone.jalalicalendar.DateConverter;
+import com.example.demo.util.ConvertDate;
 import org.camunda.bpm.client.ExternalTaskClient;
 import org.camunda.bpm.client.task.ExternalTask;
 import org.camunda.bpm.client.task.ExternalTaskHandler;
 import org.camunda.bpm.client.task.ExternalTaskService;
 import org.camunda.spin.Spin;
 import org.camunda.spin.json.SpinJsonNode;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
